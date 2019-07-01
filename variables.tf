@@ -4,11 +4,11 @@ variable "enable_microsoft" {
   default     = true
 }
 
-# variable "workstation_ipv4" {
-#   description = "Workstation external IPv4 address"
-#   type = string
-# }
-
+variable "enable_logs" {
+  description = "Enable azure log analtics for container logs"
+  type = bool
+  default = false
+}
 
 variable "random_cluster_suffix" {
   description = "Random 6 byte hex suffix for cluster name"
@@ -41,25 +41,6 @@ variable "aks_region" {
   description = "AKS region (e.g. `westeurope`)"
   type        = string
   default     = "westeurope"
-}
-
-variable "enable_azurenet" {
-  description = "Enable azure network profile (when disabled, uses `kubenet`)"
-  type = bool
-  default = false
-}
-
-variable "az_vpc_cidr" {
-  description = "Azure virtual network CIDR (e.g. `10.23.0.0/16`)"
-  type = string
-  default = "10.1.0.0/16"
-}
-
-
-variable "enable_logs" {
-  description = "Enable azure log analtics for container logs"
-  type = bool
-  default = false
 }
 
 variable "aks_name" {
