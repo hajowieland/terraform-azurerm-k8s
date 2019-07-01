@@ -1,22 +1,25 @@
 variable "enable_microsoft" {
-  description = "Enable / Disable Microsoft (e.g. `1`)"
+  description = "Enable / Disable Microsoft Azure k8s (e.g. `true`)"
   type        = bool
-  default     = false
+  default     = true
 }
 
-variable "workstation_ipv4" {
-  description = "Workstation external IPv4 address"
-  type = string
-}
+# variable "workstation_ipv4" {
+#   description = "Workstation external IPv4 address"
+#   type = string
+# }
 
-variable "nodes" {
-  description = "Worker nodes (e.g. `2`)"
-  default     = 2
-}
 
 variable "random_cluster_suffix" {
   description = "Random 6 byte hex suffix for cluster name"
   type = string
+  default = ""
+}
+
+variable "ssh_public_key" {
+  description = "Path to your SSH public key (e.g. `~/.ssh/id_rsa.pub`)"
+  type = string
+  default = "~/.ssh/id_rsa.pub"
 }
 
 variable "az_client_id" {
@@ -40,26 +43,51 @@ variable "aks_region" {
   default     = "westeurope"
 }
 
+variable "enable_azurenet" {
+  description = "Enable azure network profile (when disabled, uses `kubenet`)"
+  type = bool
+  default = false
+}
+
+variable "az_vpc_cidr" {
+  description = "Azure virtual network CIDR (e.g. `10.23.0.0/16`)"
+  type = string
+  default = "10.1.0.0/16"
+}
+
+
+variable "enable_logs" {
+  description = "Enable azure log analtics for container logs"
+  type = bool
+  default = false
+}
+
 variable "aks_name" {
   description = "AKS cluster name (e.g. `k8s-aks`)"
   type        = string
-  default     = "k8s-aks"
+  default     = "k8s"
+}
+
+variable "aks_nodes" {
+  description = "AKS Kubernetes worker nodes (e.g. `2`)"
+  type = number
+  default     = 2
 }
 
 variable "aks_node_type" {
-  description = "AKS Agent Pool Instance Type (e.g. `Standard_D1_v2` => 1vCPU, 3.75 GB RAM)"
+  description = "AKS node pool instance type (e.g. `Standard_D1_v2` => 1vCPU, 3.75 GB RAM)"
   type        = string
   default     = "Standard_D1_v2"
 }
 
-variable "aks_agent_pool_name" {
-  description = "AKS Node Pool name (e.g. `k8s-aks-nodepool`)"
+variable "aks_pool_name" {
+  description = "AKS agent node pool name (e.g. `k8s-aks-nodepool`)"
   type        = string
   default     = "k8snodepool"
 }
 
 variable "aks_node_disk_size" {
-  description = "AKS Agent Pool instance disk size in GB (e.g. `30` => minimum: 30GB, maximum: 1024)"
-  type        = string
+  description = "AKS node instance disk size in GB (e.g. `30` => minimum: 30GB, maximum: 1024)"
+  type        = number
   default     = 30
 }
