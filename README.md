@@ -2,7 +2,7 @@
 
 This repository contains the Terraform module for creating a simple but ready-to-use Kubernetes Cluster on Microsoft Azure Kubernetes Service (AKS).
 
-It uses the latest available Kubernetes version available in the Azure location and creates a kubeconfig file at completion.
+It uses the latest Kubernetes version available in the Azure location and creates a kubeconfig file at completion.
 
 
 - [Terraform Kubernetes on Microsoft Azure](#Terraform-Kubernetes-on-Microsoft-Azure)
@@ -40,7 +40,7 @@ See tables at the end for a comprehensive list of inputs and outputs.
 
 
 * Default region: **westeurope** _(Netherlands)_
-* Default Node type: **Standard_D1_v2** _(1x vCPU, 3.75GB memory)_
+* Default node type: **Standard_D1_v2** _(1x vCPU, 3.75GB memory)_
 * Default node pool size: **2**
 
 
