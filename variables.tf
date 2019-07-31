@@ -6,20 +6,20 @@ variable "enable_microsoft" {
 
 variable "enable_logs" {
   description = "Enable azure log analtics for container logs"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "random_cluster_suffix" {
   description = "Random 6 byte hex suffix for cluster name"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "ssh_public_key" {
   description = "Path to your SSH public key (e.g. `~/.ssh/id_rsa.pub`)"
-  type = string
-  default = "~/.ssh/id_rsa.pub"
+  type        = string
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "az_client_id" {
@@ -51,7 +51,7 @@ variable "aks_name" {
 
 variable "aks_nodes" {
   description = "AKS Kubernetes worker nodes (e.g. `2`)"
-  type = number
+  type        = number
   default     = 2
 }
 

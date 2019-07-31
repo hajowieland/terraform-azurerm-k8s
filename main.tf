@@ -1,4 +1,5 @@
 resource "random_id" "cluster_name" {
+  count       = var.enable_microsoft ? 1 : 0
   byte_length = 6
 }
 
@@ -9,17 +10,16 @@ resource "azurerm_resource_group" "rg" {
 }
 
 ## Log Analytics for Container logs (enable_logs = true)
-
 resource "azurerm_log_analytics_workspace" "logworkspace" {
-  count = var.enable_logs ? 1 : 0
-  name                = "${var.aks_name}-${random_id.cluster_name.hex}-law"
+  count               = var.enable_microsoft && var.enable_logs ? 1 : 0
+  name                = "${var.aks_name}-${random_id.cluster_name[count.index].hex}-law"
   location            = azurerm_resource_group.rg[count.index].location
   resource_group_name = azurerm_resource_group.rg[count.index].name
   sku                 = "PerGB2018"
 }
 
 resource "azurerm_log_analytics_solution" "logsolution" {
-  count = var.enable_logs ? 1 : 0
+  count                 = var.enable_microsoft && var.enable_logs ? 1 : 0
   solution_name         = "ContainerInsights"
   location              = azurerm_resource_group.rg[count.index].location
   resource_group_name   = azurerm_resource_group.rg[count.index].name
@@ -32,25 +32,22 @@ resource "azurerm_log_analytics_solution" "logsolution" {
   }
 }
 
-
 ## AKS
-
 # Get latest Kubernetes version available
 data "azurerm_kubernetes_service_versions" "current" {
+  count    = var.enable_microsoft ? 1 : 0
   location = azurerm_resource_group.rg.0.location
 }
-
-
 
 # AKS with standard kubenet network profile
 resource "azurerm_kubernetes_cluster" "aks" {
   count               = var.enable_microsoft ? 1 : 0
-  name                = "${var.aks_name}-${random_id.cluster_name.hex}"
-  kubernetes_version  = data.azurerm_kubernetes_service_versions.current.latest_version
+  name                = "${var.aks_name}-${random_id.cluster_name[count.index].hex}"
+  kubernetes_version  = data.azurerm_kubernetes_service_versions.current[count.index].latest_version
   location            = azurerm_resource_group.rg.0.location
   resource_group_name = azurerm_resource_group.rg.0.name
-  dns_prefix          = "${var.aks_name}-${random_id.cluster_name.hex}"
-  
+  dns_prefix          = "${var.aks_name}-${random_id.cluster_name[count.index].hex}"
+
   agent_pool_profile {
     name            = var.aks_pool_name
     count           = var.aks_nodes
@@ -77,27 +74,22 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   tags = {
-    Project = "k8s",
+    Project   = "k8s",
     ManagedBy = "terraform"
   }
 }
 
-
 ## Static Public IP Address to be used e.g. by Nginx Ingress
-
 resource "azurerm_public_ip" "public_ip" {
   count               = var.enable_microsoft ? 1 : 0
-  name                         = "k8s-public-ip"
-  location                     = azurerm_kubernetes_cluster.aks[count.index].location
-  resource_group_name          = azurerm_kubernetes_cluster.aks[count.index].node_resource_group
-  allocation_method = "Static"
-  domain_name_label            = "${var.aks_name}-${random_id.cluster_name.hex}"
+  name                = "k8s-public-ip"
+  location            = azurerm_kubernetes_cluster.aks[count.index].location
+  resource_group_name = azurerm_kubernetes_cluster.aks[count.index].node_resource_group
+  allocation_method   = "Static"
+  domain_name_label   = "${var.aks_name}-${random_id.cluster_name[count.index].hex}"
 }
 
-
 ## kubeconfig file
-
-
 resource "local_file" "kubeconfigaks" {
   count    = var.enable_microsoft ? 1 : 0
   content  = azurerm_kubernetes_cluster.aks[count.index].kube_config_raw
