@@ -60,7 +60,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     admin_username = "ubuntu"
 
     ssh_key {
-      key_data = "${file("${var.ssh_public_key}")}"
+      key_data = file(var.ssh_public_key)
     }
   }
 
@@ -82,7 +82,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 ## Static Public IP Address to be used e.g. by Nginx Ingress
 resource "azurerm_public_ip" "public_ip" {
   count               = var.enable_microsoft ? 1 : 0
-  name                = "k8s-public-ip"
+  name                = "k8s-public-ip-${random_id.cluster_name[count.index].hex}"
   location            = azurerm_kubernetes_cluster.aks[count.index].location
   resource_group_name = azurerm_kubernetes_cluster.aks[count.index].node_resource_group
   allocation_method   = "Static"
