@@ -37,6 +37,8 @@ resource "azurerm_log_analytics_solution" "logsolution" {
 data "azurerm_kubernetes_service_versions" "current" {
   count    = var.enable_microsoft ? 1 : 0
   location = var.aks_region
+
+  depends_on = [azurerm_resource_group.rg]
 }
 
 # AKS with standard kubenet network profile
