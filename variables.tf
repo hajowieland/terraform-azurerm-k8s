@@ -38,9 +38,9 @@ variable "az_tenant_id" {
 }
 
 variable "aks_region" {
-  description = "AKS region (e.g. `westeurope`)"
+  description = "AKS region (e.g. `West Europe`) -> `az account list-locations --output table`"
   type        = string
-  default     = "westeurope"
+  default     = "West Europe"
 }
 
 variable "aks_name" {
