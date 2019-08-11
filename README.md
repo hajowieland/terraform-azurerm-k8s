@@ -9,6 +9,11 @@ It uses the latest Kubernetes version available in the Azure location and create
 </p>
 
 
+##### Link to my comprehensive blog post (beginner friendly):
+
+[https://napo.io/posts/terraform-kubernetes-multi-cloud-ack-aks-dok-eks-gke-oke/#microsoft-azure](https://napo.io/posts/terraform-kubernetes-multi-cloud-ack-aks-dok-eks-gke-oke/#microsoft-azure)
+
+
 - [Terraform Kubernetes on Microsoft Azure](#Terraform-Kubernetes-on-Microsoft-Azure)
 - [Requirements](#Requirements)
 - [Features](#Features)
