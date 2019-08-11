@@ -5,10 +5,7 @@ This repository contains the Terraform module for creating a simple but ready-to
 It uses the latest Kubernetes version available in the Azure location and creates a kubeconfig file at completion.
 
 #### Link to my comprehensive blog post (beginner friendly):
-
-<p align="center">
 [https://napo.io/posts/terraform-kubernetes-multi-cloud-ack-aks-dok-eks-gke-oke/#microsoft-azure](https://napo.io/posts/terraform-kubernetes-multi-cloud-ack-aks-dok-eks-gke-oke/#microsoft-azure)
-</p>
 
 
 <p align="center">
