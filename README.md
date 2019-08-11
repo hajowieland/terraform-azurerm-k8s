@@ -47,7 +47,7 @@ You need a [Microsoft Azure](https://azure.microsoft.com/en-in/free/) account wi
 See tables at the end for a comprehensive list of inputs and outputs.
 
 
-* Default region: **westeurope** _(Netherlands)_
+* Default region: **West Europe** _(Netherlands)_
 * Default node type: **Standard_D1_v2** _(1x vCPU, 3.75GB memory)_
 * Default node pool size: **2**
 
@@ -85,7 +85,7 @@ See tables at the end for a comprehensive list of inputs and outputs.
 | az_client_id | Azure Service Principal appId | string |  | yes |
 | az_client_secret | Azure Service Principal password | string |  | yes |
 | az_tenant_id | Azure Service Principal tenant | string |  | yes |
-| aks_region | AKS region | string | westeurope | yes |
+| aks_region | AKS region | string | West Europe | yes |
 | enable_logs | Enable azure log analtics for container logs | bool | false | yes |
 | aks_name | AKS cluster name | string | k8s | yes |
 | aks_nodes | AKS Kubernetes worker nodes | number | 2 | yes |
