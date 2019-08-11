@@ -5,7 +5,7 @@ This repository contains the Terraform module for creating a simple but ready-to
 It uses the latest Kubernetes version available in the Azure location and creates a kubeconfig file at completion.
 
 <p align="center">
-<img alt="Azure Logo" width="400" height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/800px-Microsoft_Azure_Logo.svg.png">
+<img alt="Azure Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_Azure_Logo.svg/320px-Microsoft_Azure_Logo.svg.png">
 </p>
 
 
