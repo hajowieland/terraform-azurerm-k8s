@@ -45,7 +45,7 @@ data "azurerm_kubernetes_service_versions" "current" {
 resource "azurerm_kubernetes_cluster" "aks" {
   count               = var.enable_microsoft ? 1 : 0
   name                = "${var.aks_name}-${random_id.cluster_name[count.index].hex}"
-  kubernetes_version  = data.azurerm_kubernetes_service_versions.current[count.index].latest_version
+  kubernetes_version  = data.azurerm_kubernetes_service_versions.current.0.latest_version
   location            = azurerm_resource_group.rg.0.location
   resource_group_name = azurerm_resource_group.rg.0.name
   dns_prefix          = "${var.aks_name}-${random_id.cluster_name[count.index].hex}"
